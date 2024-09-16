@@ -48,7 +48,8 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
     });
 
     const filteredList = combinedList.filter(item =>
-        item.type === 'employee' || item.type === 'team' && item.members.some(member => member.firstName.toLowerCase().includes(searchQuery.toLowerCase()))
+        (item.type === 'employee' && item.firstName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (item.type === 'team' && item.members.some(member => member.firstName.toLowerCase().includes(searchQuery.toLowerCase())))
     );
 
 
