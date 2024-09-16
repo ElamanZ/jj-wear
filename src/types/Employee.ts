@@ -3,16 +3,18 @@ import { rolesSchema } from '../validation/employeeSchema';
 
 export type Roles = z.infer<typeof rolesSchema>;
 
+
 export type Employee = {
-    id: string
-    firstName: string
-    lastName: string
-    phone: string
-    role: Roles
-    teamId?: string;
-    avatar?: string;
+    id: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    role: Roles;
+    avatar: string | null;
     active: boolean;
-}
+    teamId?: string;
+};
+
 export type CombinedListItem =
     | {
         type: 'team';

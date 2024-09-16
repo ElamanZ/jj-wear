@@ -38,6 +38,7 @@ const AddEmployeePage = () => {
     const createNewSeamstressTeam = (employee: Employee) => {
         const newTeam: SeamstressTeam = {
             id: `team-${seamstressTeams.length + 1}`,
+            active: true,
             employees: [employee]
         };
         dispatch(addTeam(newTeam));

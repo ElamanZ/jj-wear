@@ -42,14 +42,15 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
                 firstName: employee.firstName,
                 role: employee.role,
                 active: employee.active,
-                avatar: employee.avatar,
+                avatar: employee.avatar ?? undefined,
             });
         }
     });
 
     const filteredList = combinedList.filter(item =>
-        item.type === 'employee' && item.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+        item.type === 'employee' || item.type === 'team' && item.members.some(member => member.firstName.toLowerCase().includes(searchQuery.toLowerCase()))
     );
+
 
     if (filteredList.length === 0) {
         return <Typography>Нет сотрудников</Typography>
@@ -58,25 +59,25 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
     return (
         <List>
             {filteredList.map(item => (
-                <Box>
+                <Box key={item.id}>  {/* Добавляем уникальный key */}
                     {item.type === 'team' && (
                         <>
-                            <ListItem className={`${styles.listItem} ${item.active ? styles.active : ''}`}  >
+                            <ListItem className={`${styles.listItem} ${item.active ? styles.active : ''}`}>
                                 <ListItemAvatar>
-                                    <AvatarGroup max={4} >
+                                    <AvatarGroup max={4}>
                                         {item.members.map(member => (
-                                            <Box key={item.id} className={styles.avatarGroup}>
+                                            <Box key={member.id} className={styles.avatarGroup}>
                                                 <Avatar
                                                     className={styles.avatar}
-                                                    key={member.id}
                                                     alt={member.firstName}
-                                                    src={member.avatar} />
+                                                    src={member.avatar ?? undefined}
+                                                />
                                             </Box>
                                         ))}
                                     </AvatarGroup>
                                 </ListItemAvatar>
 
-                                <Box key={item.id} className={styles.textContainer}>
+                                <Box className={styles.textContainer}>
                                     <Typography variant="body2">
                                         {item.members.map(val => `${val.firstName}`).join(', ')}
                                     </Typography>
@@ -86,7 +87,6 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
                                     Швеи
                                 </Box>
 
-
                                 <Switch
                                     checked={item.active}
                                     onChange={() => onToggleActiveTeam(item.id, item.active)}
@@ -95,29 +95,26 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
                                 <IconButton edge="end" aria-label="delete" onClick={() => onDeleteTeam(item.id)}>
                                     <Delete />
                                 </IconButton>
-
                             </ListItem>
                         </>
                     )}
 
-
                     {item.type === 'employee' && (
                         <>
-                            <ListItem className={`${styles.listItem} ${item.active ? styles.active : ''}`}  >
+                            <ListItem className={`${styles.listItem} ${item.active ? styles.active : ''}`}>
                                 <ListItemAvatar>
-                                    <AvatarGroup max={2} >
+                                    <AvatarGroup max={2}>
                                         <Box className={styles.avatarGroup}>
                                             <Avatar
                                                 className={styles.avatar}
-                                                key={item.id}
                                                 alt={item.firstName}
-                                                src={item.avatar} />
+                                                src={item.avatar}
+                                            />
                                         </Box>
-
                                     </AvatarGroup>
                                 </ListItemAvatar>
 
-                                <Box key={item.id} className={styles.textContainer}>
+                                <Box className={styles.textContainer}>
                                     <Typography variant="body2">
                                         {item.firstName}
                                     </Typography>
