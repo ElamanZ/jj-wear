@@ -38,20 +38,21 @@ const EmployeeForm = ({ onSubmit, createNewSeamstressTeam, updateSeamstressTeam,
         resolver: zodResolver(employeeSchema),
     });
 
+    console.log(setImagePreview);
 
-    const handleImageUpload = (file: File) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImagePreview(reader.result as string);
-        };
-        reader.readAsDataURL(file);
-    };
+    // const handleImageUpload = (file: File) => {
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         setImagePreview(reader.result as string);
+    //     };
+    //     reader.readAsDataURL(file);
+    // };
 
-    const handleClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
+    // const handleClick = () => {
+    //     if (fileInputRef.current) {
+    //         fileInputRef.current.click();
+    //     }
+    // };
     const formValues = watch();
 
     const handleCreateNewTeam = () => {
@@ -74,19 +75,21 @@ const EmployeeForm = ({ onSubmit, createNewSeamstressTeam, updateSeamstressTeam,
                     control={control}
                     render={({ field: { onChange } }) => (
                         <Box display="flex" alignItems="center" gap={2} className={styles.imageUpload}>
-                            <Box onClick={handleClick}>
+                            {/* <Box onClick={handleClick}> */}
+                            <Box >
                                 <input
                                     ref={fileInputRef}
                                     type="file"
                                     hidden
                                     accept="image/*"
-                                    onChange={(e) => {
-                                        const file = e.target.files?.[0];
-                                        if (file) {
-                                            onChange(file);
-                                            handleImageUpload(file);
-                                        }
-                                    }}
+                                    // onChange={(e) => {
+                                    //     const file = e.target.files?.[0];
+                                    //     if (file) {
+                                    //         onChange(file);
+                                    //         handleImageUpload(file);
+                                    //     }
+                                    // }}
+                                    onChange={onChange}
                                 />
                                 <Box >
                                     {imagePreview ? (

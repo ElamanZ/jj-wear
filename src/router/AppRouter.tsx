@@ -9,7 +9,7 @@ import WearsPage from '../pages/WearsPage';
 
 const AppRouter = () => {
     return (
-        <Router basename="/jj-wear">
+        <Router >
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Dashboard />} />
