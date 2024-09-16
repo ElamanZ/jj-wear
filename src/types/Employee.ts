@@ -10,7 +10,7 @@ export type Employee = {
     lastName: string;
     phone: string;
     role: Roles;
-    avatar: string | null;
+    avatar: File | null;
     active: boolean;
     teamId?: string;
 };
@@ -28,7 +28,7 @@ export type CombinedListItem =
         firstName: string;
         role: Roles;
         active: boolean;
-        avatar?: string
+        avatar?: File | null;
     };
 
 export type SeamstressTeam = {

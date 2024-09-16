@@ -70,7 +70,7 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
                                                 <Avatar
                                                     className={styles.avatar}
                                                     alt={member.firstName}
-                                                    src={member.avatar ?? undefined}
+                                                    src={member.avatar?.name ?? undefined}
                                                 />
                                             </Box>
                                         ))}
@@ -108,7 +108,7 @@ const EmployeeList = ({ onDeleteEmployee, onToggleActiveEmployee, onDeleteTeam, 
                                             <Avatar
                                                 className={styles.avatar}
                                                 alt={item.firstName}
-                                                src={item.avatar}
+                                                src={item.avatar?.name}
                                             />
                                         </Box>
                                     </AvatarGroup>

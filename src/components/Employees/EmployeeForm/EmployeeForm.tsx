@@ -10,7 +10,6 @@ import styles from './EmployeeForm.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 
-
 type EmployeeFormData = z.infer<typeof employeeSchema>;
 type Props = {
     onSubmit: (data: EmployeeFormData) => void;
@@ -84,7 +83,7 @@ const EmployeeForm = ({ onSubmit, createNewSeamstressTeam, updateSeamstressTeam,
                                     onChange={(e) => {
                                         const file = e.target.files?.[0];
                                         if (file) {
-                                            onChange(file.name);
+                                            onChange(file);
                                             handleImageUpload(file);
                                         }
                                     }}
